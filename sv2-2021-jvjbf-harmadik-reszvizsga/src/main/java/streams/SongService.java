@@ -20,7 +20,7 @@ public class SongService {
 
     public List<Song> findSongByTitle(String title){
         return songs.stream()
-                .map(Song::getTitle)
+                .filter(s->s.getTitle().equals(title))
                 .toList();
     }
     public boolean isPerformerInSong(Song song,String name){
