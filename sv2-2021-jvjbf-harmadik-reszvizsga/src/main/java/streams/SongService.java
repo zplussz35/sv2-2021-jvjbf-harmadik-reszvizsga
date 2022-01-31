@@ -30,7 +30,7 @@ public class SongService {
     }
     public List<String> titlesBeforeDate(LocalDate date){
         return songs.stream()
-                .filter(s->s.getDateOfAppearance().isBefore(date))
+                .filter(s->s.getRelease().isBefore(date))
                 .map(Song::getTitle)
                 .toList();
     }

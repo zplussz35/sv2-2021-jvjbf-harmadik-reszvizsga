@@ -29,7 +29,7 @@ public class Song {
         return performers;
     }
 
-    public LocalDate getDateOfAppearance() {
+    public LocalDate getRelease() {
         return dateOfAppearance;
     }
 }
