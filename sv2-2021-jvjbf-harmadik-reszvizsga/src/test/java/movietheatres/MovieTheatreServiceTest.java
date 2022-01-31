@@ -37,13 +37,13 @@ class MovieTheatreServiceTest {
 
     @Test
     void testFindLatestShowTest() {
-        assertEquals(LocalTime.of(20,45),mvs.findLatestShow("Lord Of The Rings"));
-        assertEquals(LocalTime.of(19,45),mvs.findLatestShow("Star Wars"));
+        assertEquals(LocalTime.of(20, 45), mvs.findLatestShow("Lord Of The Rings"));
+        assertEquals(LocalTime.of(19, 45), mvs.findLatestShow("Star Wars"));
     }
 
     @Test
-    void testFindLatestShowWithWrongName(){
-        assertThrows(IllegalArgumentException.class,()->mvs.findLatestShow("Indiana Jones"));
+    void testFindLatestShowWithWrongName() {
+        assertThrows(IllegalArgumentException.class, () -> mvs.findLatestShow("Indiana Jones"));
     }
 
 }

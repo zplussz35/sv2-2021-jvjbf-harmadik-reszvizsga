@@ -71,41 +71,41 @@ class RentServiceTest {
 
         assertTrue(rentService.getActualRenting().containsKey(car));
         assertEquals("jack", rentService.getActualRenting().get(car).getUserName());
-        assertEquals(LocalTime.of(13,12),car.getRentingTime());
+        assertEquals(LocalTime.of(13, 12), car.getRentingTime());
         assertEquals(1, rentService.getActualRenting().keySet().size());
     }
 
     @Test
-    void rentRentableTwiceTest(){
+    void rentRentableTwiceTest() {
         rentService.rent(user1, car, LocalTime.of(13, 12));
-        assertThrows(IllegalStateException.class,()->rentService.rent(user2, car, LocalTime.of(13, 16)));
+        assertThrows(IllegalStateException.class, () -> rentService.rent(user2, car, LocalTime.of(13, 16)));
     }
 
     @Test
-    void rentWithLowBalanceTest(){
+    void rentWithLowBalanceTest() {
         user1 = new User("jack", "jack@email.com", 8099);
-        assertThrows(IllegalStateException.class,()->rentService.rent(user1, car, LocalTime.of(13, 16)));
+        assertThrows(IllegalStateException.class, () -> rentService.rent(user1, car, LocalTime.of(13, 16)));
     }
 
     @Test
-    void testActualRentingInOrder(){
+    void testActualRentingInOrder() {
 
         rentService.rent(user1, car, LocalTime.of(13, 12));
         rentService.rent(user2, bike, LocalTime.of(13, 10));
 
 
-        assertEquals(List.of(bike,car), new ArrayList<>(rentService.getActualRenting().keySet()));
+        assertEquals(List.of(bike, car), new ArrayList<>(rentService.getActualRenting().keySet()));
     }
 
     @Test
-    void closeRentTest(){
+    void closeRentTest() {
         rentService.rent(user1, car, LocalTime.of(13, 12));
         rentService.rent(user2, bike, LocalTime.of(13, 10));
 
-        rentService.closeRent(car,30);
+        rentService.closeRent(car, 30);
 
-        assertEquals(List.of(bike),new ArrayList<>(rentService.getActualRenting().keySet()));
-        assertEquals(user1.getBalance(),8650);
+        assertEquals(List.of(bike), new ArrayList<>(rentService.getActualRenting().keySet()));
+        assertEquals(user1.getBalance(), 8650);
         assertNull(car.getRentingTime());
     }
 
