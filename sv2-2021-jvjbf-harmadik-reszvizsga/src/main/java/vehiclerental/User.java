@@ -14,7 +14,11 @@ public class User {
     }
 
     public void minusBalance(int sum){
+
         balance-=sum;
+        if(balance<0){
+            throw new IllegalStateException("Cannot rent!");
+        }
     }
 
     public String getUserName() {

@@ -22,10 +22,10 @@ public class RentService {
     public void rent(User user, Rentable rentable, LocalTime time) {
         if (time.getMinute() <= 180) {
             if (rentable.getRentingTime() == null) {
-                if (user.getBalance() >= rentable.calculateSumPrice(time.getMinute())){
+                if (user.getBalance() >= rentable.calculateSumPrice(time.getMinute())) {
                     rentable.rent(time);
-                    rents.put(rentable,user);
-                }else{
+                    rents.put(rentable, user);
+                } else {
                     throw new IllegalStateException("Dont have enough money!");
                 }
 
@@ -34,30 +34,30 @@ public class RentService {
             }
 
         } else {
-                throw new IllegalStateException("max rentingtime is 3 hours!");
+            throw new IllegalStateException("max rentingtime is 3 hours!");
         }
     }
 
-    public void closeRent(Rentable rentable, int minutes){
-        if(rents.containsKey(rentable)){
+    public void closeRent(Rentable rentable, int minutes) {
+        if (rents.containsKey(rentable)) {
+
             rents.get(rentable).minusBalance(rentable.calculateSumPrice(minutes));
             rents.remove(rentable);
             rentable.closeRent();
-        }
-        else{
+        } else {
             throw new IllegalStateException("Dont contains this rent!");
         }
     }
 
-    public Set<User> getUsers(){
+    public Set<User> getUsers() {
         return users;
     }
 
-    public Set<Rentable> getRentables(){
+    public Set<Rentable> getRentables() {
         return vehicles;
     }
 
-    public Map<Rentable,User> getActualRenting(){
+    public Map<Rentable, User> getActualRenting() {
         return rents;
     }
 
